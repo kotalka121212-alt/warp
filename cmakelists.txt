@@ -4,6 +4,7 @@ project(warp LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(BOOST_ROOT "G:/progects_c++/every_langs/libs/nexus_libs/source_libs/libs/boost_1_90_0")
 
 add_library(main INTERFACE)
 
@@ -12,11 +13,16 @@ ${CMAKE_CURRENT_SOURCE_DIR}/
 
 )
 
-
-
 add_executable(warp main.cpp engine.cpp)
+target_precompile_headers(warp PRIVATE includes/pch.h)
 
-target_link_directories(warp PRIVATE main)
+
+target_include_directories(warp PRIVATE ${BOOST_ROOT})
+
+target_link_libraries(warp PRIVATE ws2_32)
+
+
+target_link_libraries(warp PRIVATE main)
 
 
 

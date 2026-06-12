@@ -6,6 +6,10 @@
 #include <chrono>
 #include <thread>
 
+#include <boost/asio.hpp>
+
+using boost::asio::ip::tcp;
+
 
 namespace eng{
 class engine{
@@ -18,9 +22,15 @@ void stop();
 bool isrunning() const;
 
 private:
+boost::asio::io_context io;
+tcp::acceptor acceptor;
+
 bool running = false;
 std::string winT;
 int winW, winH;
+
+void NetworkLoop();
+std::thread networkThread;
 
 };
 
